@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+{% block content %} 
+{% load static %}
+
+
+<div style="
+	width: 760px;
+	height: 162px;
+	margin: 0px auto;
+	padding: 0px;
+	color: #FFFFFF; 
+	position: relative;"></div>
+<div class="px-4 py-3 my-1 text-center"> 
+  
+  <div class="col-lg-6 mx-auto "> 
+    <h2>Account Login</h2>
+    <hr>
+    {% if user.is_authenticated %}
+    <p>Current user: {{ user.email }}</p>
+    <form action="{% url 'oidc_logout' %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="logout">
+    </form>
+    {% else %}
+    <h6>Sign in with an existing account </h6>
+    <a href="{% url 'oidc_authentication_init' %}">
+      <img src="https://sa.www4.irs.gov/sso/resources/img/idme/sign-in.svg" height="44" width="300" padding="0" alt="Sign In with ID.me">
+    </a>
+    <br>
+    <div class="separator-spacer px-2 py-4"><b>OR</b></div> 
+
+    <h6>Create a new account</h6>
+
+    <a href="{% url 'oidc_authentication_init' %}"> 
+      <img src="https://sa.www4.irs.gov/sso/resources/img/idme/create-acct.svg" height="44" width="300" padding="0" border="0" alt="Create an account with ID.me"
+      class="border-green"
+      >
+    </a>
+
+    {% endif %} 
+  </div>
+</div>
+
+
+
+
+{% endblock content %}
+
